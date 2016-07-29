@@ -1,21 +1,60 @@
-.traffic-light {
+.clock {
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 500px;
+  width: 500px;
+  position: relative; }
+
+.hour-div {
+  color: black;
+  font-size: 50px;
+  height: 250px;
+  line-height: 80px;
+  margin: 0px 0px 0px 245px;
+  position: absolute;
+  top: 0px;
+  transform-origin: left bottom; }
+  .hour-div.hour1 {
+    transform: rotate(30deg); }
+  .hour-div.hour2 {
+    transform: rotate(60deg); }
+  .hour-div.hour3 {
+    transform: rotate(90deg); }
+  .hour-div.hour4 {
+    transform: rotate(120deg); }
+  .hour-div.hour5 {
+    transform: rotate(150deg); }
+  .hour-div.hour6 {
+    transform: rotate(180deg); }
+  .hour-div.hour7 {
+    transform: rotate(210deg); }
+  .hour-div.hour8 {
+    transform: rotate(240deg); }
+  .hour-div.hour9 {
+    transform: rotate(270deg); }
+  .hour-div.hour10 {
+    transform: rotate(300deg); }
+  .hour-div.hour11 {
+    transform: rotate(330deg); }
+  .hour-div.hour12 {
+    transform: rotate(360deg); }
+
+.indicator {
   background: black;
-  margin-bottom: 10px;
-  padding: 20px;
-  width: 200px; }
-  .traffic-light .light {
-    background: white;
-    border-radius: 100%;
-    height: 150px;
-    margin: 0 auto 10px auto;
-    width: 150px; }
-    .traffic-light .light.green {
-      background: #0f0; }
-    .traffic-light .light.red {
-      background: red; }
-    .traffic-light .light.yellow {
-      background: yellow; }
-    .traffic-light .light.off {
-      opacity: 0.3; }
-    .traffic-light .light:last-child {
-      margin-bottom: 0; }
+  height: 230px;
+  left: 265px;
+  position: absolute;
+  top: 30px;
+  transform-origin: bottom center; }
+  .indicator.hours {
+    background: black;
+    width: 15px; }
+  .indicator.minutes {
+    background: blue;
+    width: 10px; }
+  .indicator.seconds {
+    background: red;
+    width: 5px; }
+
+.digital {
+  font-size: 100px; }

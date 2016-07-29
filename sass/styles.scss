@@ -1,36 +1,55 @@
-$traffic-light-width: 200px;
-$light-size: $traffic-light-width*0.75;
-.traffic-light{
-  background: black;
-  margin-bottom: 10px;
-  padding: $traffic-light-width*0.1;
-  width: $traffic-light-width;
+$margin-top: 0px;
 
-  .light{
-    background: white;
-    border-radius: 100%;
-    height: $light-size;
-    margin: 0 auto 10px auto;
-    width: $light-size;
+.clock {
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 500px;
+  width: 500px;
+  position: relative;
+}
 
-    &.green{
-      background: #0f0;
-    }
+.hour-div {
+  color: black;
+  font-size: 50px;
+  height: 250px;
+  line-height: 80px;
+  margin: 0px 0px 0px 245px;
+  position: absolute;
+  top: $margin-top;
+  transform-origin: left bottom;
 
-    &.red{
-      background: red;
-    }
-
-    &.yellow{
-      background: yellow;
-    }
-
-    &.off{
-      opacity: 0.3;
-    }
-
-    &:last-child{
-      margin-bottom: 0;
+  @for $i from 1 through (12) {
+    &.hour#{ $i } {
+      transform: rotate($i * 30deg);
     }
   }
+
+}
+
+.indicator {
+  background: black;
+  height: 230px;
+  left: 265px;
+  position: absolute;
+  top: $margin-top + 30px;
+  transform-origin: bottom center;
+
+  &.hours {
+    background: black;
+    width: 15px;
+  }
+
+  &.minutes {
+    background: blue;
+    width: 10px;
+  }
+
+  &.seconds {
+    background: red;
+    width: 5px;
+  }
+}
+
+.digital {
+  font-size: 100px;
 }

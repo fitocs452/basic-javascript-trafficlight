@@ -1,61 +1,70 @@
-/*
+var reloj = "analog";
 
-state = 0: red
-state = 1: yellow
-state = 2: green
+var date = new Date;
+/* Actual time */
+var second = date.getSeconds();
+var minute = date.getMinutes();
+var hour = date.getHours();
 
-*/
+/* Hour, minutes and seconds indicators */
+var seconds_indicator = document.getElementById("seconds_ind");
+var minutes_indicator = document.getElementById("minutes_ind");
+var hour_indicator = document.getElementById("hours_ind");
 
-// Modelo / estado
-var state = 0;
-
-var viewport = document.getElementById("viewport");
-var changeTrigger = document.getElementById("change");
-
-changeTrigger.addEventListener("click", function(){
-  if(state === 0){
-    state = 2;
-  }
-  else if(state === 1){
-    state = 0;
-  }
-  else{
-    state = 1;
-  }
-
-  viewport.innerHTML = render(state);
-});
-
-
-function render(state){
-  var html = "";
-
-  html += '<div class="traffic-light">';
-
-  if(state === 0){
-    html += '<div class="red light"></div>';
-  }
-  else{
-    html += '<div class="red light off"></div>';
-  }
-
-  if(state === 1){
-    html += '<div class="yellow light"></div>';
-  }
-  else{
-    html += '<div class="yellow light off"></div>';
-  }
-
-  if(state === 2){
-    html += '<div class="green light"></div>';
-  }
-  else{
-    html += '<div class="green light off"></div>';
-  }
-
-  html += '</div>';
-
-  return html;
+function addActivityItem(){
+  var selector = document.getElementById("selector");
+  reloj = selector.options[selector.selectedIndex].value;
+  setClockView();
+  refreshPage();
 }
 
-viewport.innerHTML = render(state);
+function changeTime() {
+  second = second + 6;
+  if (second >= 360) {
+    second = second - 360;
+    minute = minute + 6;
+  }
+  if (minute >= 360) {
+    minute = minute - 360;
+    hour = hour + 30;
+  }
+  if (hour >= 360) {
+    hour = hour - 360;
+  }
+  refreshPage();
+}
+
+function refreshPage() {
+  if (reloj === "analog") {
+    seconds_indicator.style.transform = "rotate(" + second + "deg)";
+    minutes_indicator.style.transform = "rotate(" + minute + "deg)";
+    hour_indicator.style.transform = "rotate(" + hour + "deg)";
+
+  } else {
+    var hours = Math.round(hour / 30);
+    var mins = Math.round(minute / 6);
+    var seconds = Math.round(second / 6);
+
+    var actualTime = "" + hours + " : " + mins + " : " + seconds;
+    document.getElementById("digital-clock").innerHTML = actualTime;
+  }
+}
+
+
+function setClockView() {
+  if (reloj === "analog") {
+    document.getElementById("digital-clock").style.display = 'none';
+    document.getElementById("analog-clock").style.display = 'inline-block';
+  } else {
+    document.getElementById("analog-clock").style.display = 'none';
+    document.getElementById("digital-clock").style.display = 'inline-block';
+  }
+}
+
+function start() {
+  document.getElementById("selector").addEventListener("change", addActivityItem, false);
+}
+
+setClockView();
+window.addEventListener("load", start, false);
+window.setInterval(changeTime, 1000);
